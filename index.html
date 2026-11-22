@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Investment calculators for lump sum returns, CAGR, SIP and SWP planning.">
+  <title>InvestWise | Investment Calculators</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">↗</span><span>invest<span class="brand-light">wise</span></span></a>
+    <div class="side-label">CALCULATORS</div>
+    <nav class="nav-list" aria-label="Calculator navigation">
+      <button class="nav-item active" data-view="lumpsum"><span>◈</span> Lump Sum / CAGR Return</button>
+      <button class="nav-item" data-view="cagr"><span>％</span> CAGR Calculator</button>
+      <button class="nav-item" data-view="sip"><span>↻</span> SIP Calculator</button>
+      <button class="nav-item" data-view="swp"><span>⇣</span> SWP Calculator</button>
+    </nav>
+    <div class="sidebar-note"><div class="note-icon">✦</div><strong>Plan with clarity</strong><p>Explore potential investment outcomes using your own assumptions.</p></div>
+    <div class="sidebar-footer">INVESTMENT TOOLS <span>v1.1</span></div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div><div class="eyebrow">PERSONAL FINANCE TOOLKIT</div><h1 id="page-title">CAGR Investment Return Calculator</h1><p id="page-subtitle">Estimate how your one-time investment may grow over time.</p></div>
+      <div class="topbar-right">
+        <label class="currency-control" for="currency-select"><span>Currency</span><select id="currency-select" aria-label="Currency"><option value="INR" selected>₹ INR</option><option value="USD">$ USD</option><option value="GBP">£ GBP</option><option value="EUR">€ EUR</option></select></label>
+        <div class="avatar">IW</div>
+      </div>
+    </header>
+
+    <section class="view active" id="view-lumpsum">
+      <div class="content-grid">
+        <section class="panel input-panel">
+          <div class="panel-heading"><div><h2>Investment details</h2><p>Enter your investment assumptions.</p></div><span class="step-tag">01 / INPUT</span></div>
+          <div class="field"><label for="ls-amount">Investment amount</label><div class="input-wrap"><span class="input-prefix currency-symbol">₹</span><input id="ls-amount" type="number" min="0" step="1000" value="1000000"><span class="input-suffix">One-time</span></div></div>
+          <div class="field"><div class="label-row"><label for="ls-rate">Expected CAGR</label><strong id="ls-rate-label">12%</strong></div><input id="ls-rate" type="range" min="0" max="40" step="0.5" value="12"><div class="range-labels"><span>0%</span><span>40%</span></div></div>
+          <div class="field"><div class="label-row"><label for="ls-years">Investment period</label><strong id="ls-years-label">10 years</strong></div><input id="ls-years" type="range" min="1" max="40" value="10"><div class="range-labels"><span>1 year</span><span>40 years</span></div></div>
+          <div class="assumption"><span class="info-dot">i</span><span>Assumes a constant annual compounded return. Actual market returns vary.</span></div>
+        </section>
+        <section class="panel result-panel">
+          <div class="result-top"><div><div class="result-kicker">ESTIMATED FUTURE VALUE</div><div class="hero-value" id="ls-future">₹31,05,848</div></div><div class="growth-icon">↗</div></div>
+          <div class="result-stats"><div><span>Invested amount</span><strong id="ls-invested">₹10,00,000</strong></div><div><span>Estimated profit</span><strong class="positive" id="ls-profit">₹21,05,848</strong></div><div><span>Total growth</span><strong id="ls-growth">210.6%</strong></div></div>
+          <div class="chart-title"><div><h3>Value composition</h3><span>Principal vs estimated returns</span></div></div>
+          <div class="composition-bar"><div id="ls-principal-bar"></div><div id="ls-profit-bar"></div></div>
+          <div class="legend"><span><i class="legend-principal"></i> Invested amount</span><span><i class="legend-profit"></i> Estimated profit</span></div>
+          <div class="chart-title annual-title"><div><h3>Projected growth</h3><span>Estimated value by year</span></div></div>
+          <div class="chart-wrap"><canvas id="ls-chart" role="img" aria-label="Projected investment growth chart"></canvas></div>
+        </section>
+      </div>
+      <section class="panel table-panel"><div class="panel-heading"><div><h2>Year-wise projection</h2><p>Illustrative annual compounding schedule.</p></div><button class="text-button" id="ls-download">Download CSV ↓</button></div><div class="table-scroll"><table><thead><tr><th>Year</th><th>Opening value</th><th>Estimated growth</th><th>Closing value</th></tr></thead><tbody id="ls-table"></tbody></table></div></section>
+    </section>
+
+    <section class="view" id="view-cagr">
+      <div class="single-grid">
+        <section class="panel input-panel">
+          <div class="panel-heading"><div><h2>Calculate CAGR</h2><p>Find the annualized growth rate between two values.</p></div><span class="step-tag">01 / INPUT</span></div>
+          <div class="field"><label for="cagr-start">Initial investment</label><div class="input-wrap"><span class="input-prefix currency-symbol">₹</span><input id="cagr-start" type="number" min="0.01" value="500000"></div></div>
+          <div class="field"><label for="cagr-end">Current / final value</label><div class="input-wrap"><span class="input-prefix currency-symbol">₹</span><input id="cagr-end" type="number" min="0.01" value="900000"></div></div>
+          <div class="field"><label for="cagr-years">Investment period (years)</label><input id="cagr-years" type="number" min="0.01" step="0.1" value="5"></div>
+          <p class="inline-error" id="cagr-error" aria-live="polite"></p>
+        </section>
+        <section class="panel result-panel cagr-result"><div class="result-kicker">COMPOUND ANNUAL GROWTH RATE</div><div class="hero-value" id="cagr-result">12.47%</div><p class="result-description">The annualized rate at which the initial amount would have grown to the final amount over the selected period.</p><div class="formula-box"><span>Formula</span><strong>CAGR = (Final value ÷ Initial value)<sup>1 / Years</sup> − 1</strong></div></section>
+      </div>
+    </section>
+
+    <section class="view" id="view-sip">
+      <div class="content-grid">
+        <section class="panel input-panel">
+          <div class="panel-heading"><div><h2>SIP details</h2><p>Estimate the future value of regular monthly investing.</p></div><span class="step-tag">01 / INPUT</span></div>
+          <div class="field"><label for="sip-monthly">Monthly investment</label><div class="input-wrap"><span class="input-prefix currency-symbol">₹</span><input id="sip-monthly" type="number" min="1" step="500" value="10000"><span class="input-suffix">Monthly</span></div></div>
+          <div class="field"><div class="label-row"><label for="sip-rate">Expected annual return</label><strong id="sip-rate-label">12%</strong></div><input id="sip-rate" type="range" min="0" max="40" step="0.5" value="12"><div class="range-labels"><span>0%</span><span>40%</span></div></div>
+          <div class="field"><div class="label-row"><label for="sip-years">Investment period</label><strong id="sip-years-label">10 years</strong></div><input id="sip-years" type="range" min="1" max="40" value="10"><div class="range-labels"><span>1 year</span><span>40 years</span></div></div>
+          <div class="assumption"><span class="info-dot">i</span><span>Assumes contributions at the end of each month and a constant effective monthly rate.</span></div>
+        </section>
+        <section class="panel result-panel">
+          <div class="result-top"><div><div class="result-kicker">ESTIMATED SIP VALUE</div><div class="hero-value" id="sip-future">₹23,00,387</div></div><div class="growth-icon">↗</div></div>
+          <div class="result-stats"><div><span>Total invested</span><strong id="sip-invested">₹12,00,000</strong></div><div><span>Estimated profit</span><strong class="positive" id="sip-profit">₹11,00,387</strong></div><div><span>Monthly SIP</span><strong id="sip-monthly-out">₹10,000</strong></div></div>
+          <div class="chart-title"><div><h3>Value composition</h3><span>Contributions vs estimated returns</span></div></div><div class="composition-bar"><div id="sip-principal-bar"></div><div id="sip-profit-bar"></div></div>
+          <div class="legend"><span><i class="legend-principal"></i> Total invested</span><span><i class="legend-profit"></i> Estimated profit</span></div>
+          <div class="chart-title annual-title"><div><h3>Projected growth</h3><span>Estimated value by year</span></div></div><div class="chart-wrap"><canvas id="sip-chart" role="img" aria-label="Projected SIP growth chart"></canvas></div>
+        </section>
+      </div>
+      <section class="panel table-panel"><div class="panel-heading"><div><h2>Year-wise projection</h2><p>Contributions and estimated value by year.</p></div><button class="text-button" id="sip-download">Download CSV ↓</button></div><div class="table-scroll"><table><thead><tr><th>Year</th><th>Total invested</th><th>Estimated profit</th><th>Closing value</th></tr></thead><tbody id="sip-table"></tbody></table></div></section>
+    </section>
+
+    <section class="view" id="view-swp">
+      <div class="content-grid">
+        <section class="panel input-panel">
+          <div class="panel-heading"><div><h2>SWP details</h2><p>Estimate withdrawals and the remaining investment value.</p></div><span class="step-tag">01 / INPUT</span></div>
+          <div class="field"><label for="swp-principal">Initial investment</label><div class="input-wrap"><span class="input-prefix currency-symbol">₹</span><input id="swp-principal" type="number" min="1" step="10000" value="5000000"></div></div>
+          <div class="field"><label for="swp-monthly">Monthly withdrawal</label><div class="input-wrap"><span class="input-prefix currency-symbol">₹</span><input id="swp-monthly" type="number" min="0" step="1000" value="30000"></div></div>
+          <div class="field"><div class="label-row"><label for="swp-rate">Expected annual return</label><strong id="swp-rate-label">8%</strong></div><input id="swp-rate" type="range" min="0" max="30" step="0.5" value="8"><div class="range-labels"><span>0%</span><span>30%</span></div></div>
+          <div class="field"><div class="label-row"><label for="swp-years">Withdrawal period</label><strong id="swp-years-label">15 years</strong></div><input id="swp-years" type="range" min="1" max="40" value="15"><div class="range-labels"><span>1 year</span><span>40 years</span></div></div>
+          <div class="assumption"><span class="info-dot">i</span><span>Illustrative monthly model: returns are credited monthly, then the withdrawal is deducted at month-end.</span></div>
+        </section>
+        <section class="panel result-panel">
+          <div class="result-top"><div><div class="result-kicker">ESTIMATED ENDING BALANCE</div><div class="hero-value" id="swp-ending">₹—</div></div><div class="growth-icon">↗</div></div>
+          <div class="result-stats"><div><span>Initial investment</span><strong id="swp-invested">₹50,00,000</strong></div><div><span>Total withdrawn</span><strong id="swp-withdrawn">₹54,00,000</strong></div><div><span>Investment status</span><strong id="swp-status">Sustainable</strong></div></div>
+          <div class="chart-title"><div><h3>Withdrawal projection</h3><span>Estimated remaining balance by year</span></div></div>
+          <div class="chart-wrap swp-chart"><canvas id="swp-chart" role="img" aria-label="SWP remaining balance chart"></canvas></div>
+          <p class="result-description" id="swp-note">This is an illustration based on a constant return assumption.</p>
+        </section>
+      </div>
+      <section class="panel table-panel"><div class="panel-heading"><div><h2>Year-wise SWP projection</h2><p>Withdrawals and estimated remaining balance.</p></div><button class="text-button" id="swp-download">Download CSV ↓</button></div><div class="table-scroll"><table><thead><tr><th>Year</th><th>Opening balance</th><th>Total withdrawn</th><th>Estimated return</th><th>Closing balance</th></tr></thead><tbody id="swp-table"></tbody></table></div></section>
+    </section>
+    <footer class="footer"><span>InvestWise · Personal investment planning tool</span><span>For illustration only · Not investment advice</span></footer>
+  </main>
+</div>
+<script src="js/calculator.js"></script>
+</body>
+</html>
